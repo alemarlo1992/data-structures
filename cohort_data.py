@@ -36,30 +36,64 @@ def unique_houses(filename):
     return houses
 
 
-# def sort_by_cohort(filename):
-#     """TODO: Return a list of all cohort lists, including ghosts but not instructors.
+def sort_by_cohort(filename):
+    """TODO: Return a list of all cohort lists, including ghosts but not instructors.
 
-#     Sort students by cohort, skipping instructors.
+    Sort students by cohort, skipping instructors.
 
-#     Iterate over the data to create a list for each cohort. Puts ghosts into a
-#     separate list called "ghosts".
+    Iterate over the data to create a list for each cohort. Puts ghosts into a
+    separate list called "ghosts".
 
-#     For example:
+    For example:
 
-#     >>> sort_by_cohort("cohort_data.txt")
-#     [['Harry Potter', 'Mandy Brocklehurst', 'Ron Weasley', 'Oliver Wood', 'Colin Creevey', 'Cho Chang', 'Michael Corner', 'Draco Malfoy', 'Seamus Finnigan', 'Eddie Carmichael', 'Theodore Nott', 'Terence Higgs', 'Hermione Granger', 'Penelope Clearwater', 'Angelina Johnson', 'Dennis Creevey'], ['Neville Longbottom', 'Cedric Diggory', 'Pansy Parkinson', 'Anthony Goldstein', 'Padma Patil', 'Luna Lovegood', 'Eleanor Branstone', 'Lee Jordan', 'Marietta Edgecombe', 'Andrew Kirke', 'Ginny Weasley', 'Mary Macdonald', 'Blaise Zabini', 'Natalie McDonald', 'Adrian Pucey', 'Hannah Abbott', 'Graham Pritchard', 'Susan Bones', 'Roger Davies', 'Owen Cauldwell'], ['Laura Madley', 'Orla Quirke', 'Parvati Patil', 'Eloise Midgeon', 'Zacharias Smith', 'Cormac McLaggen', 'Lisa Turpin', 'Demelza Robins', 'Ernie Macmillan', 'Millicent Bullstrode', 'Percy Weasley', 'Jimmy Peakes', 'Justin Finch-Fletchley', 'Miles Bletchley', 'Malcolm Baddock'], ['Marcus Belby', 'Euan Abercrombie', 'Vincent Crabbe', 'Ritchie Coote', 'Katie Bell', 'Terry Boot', 'Lavender Brown', 'Gregory Goyle', 'Marcus Flint', 'Dean Thomas', 'Jack Sloper', 'Rose Zeller', 'Stewart Ackerley', 'Fred Weasley', 'George Weasley', 'Romilda Vane', 'Alicia Spinnet', 'Kevin Whitby'], ['Friendly Friar', 'Grey Lady', 'Nearly Headless Nick', 'Bloody Baron']]
-#     """
+    >>> sort_by_cohort("cohort_data.txt")
+    [['Harry Potter', 'Mandy Brocklehurst', 'Ron Weasley', 'Oliver Wood', 'Colin Creevey', 'Cho Chang', 'Michael Corner', 'Draco Malfoy', 'Seamus Finnigan', 'Eddie Carmichael', 'Theodore Nott', 'Terence Higgs', 'Hermione Granger', 'Penelope Clearwater', 'Angelina Johnson', 'Dennis Creevey'], ['Neville Longbottom', 'Cedric Diggory', 'Pansy Parkinson', 'Anthony Goldstein', 'Padma Patil', 'Luna Lovegood', 'Eleanor Branstone', 'Lee Jordan', 'Marietta Edgecombe', 'Andrew Kirke', 'Ginny Weasley', 'Mary Macdonald', 'Blaise Zabini', 'Natalie McDonald', 'Adrian Pucey', 'Hannah Abbott', 'Graham Pritchard', 'Susan Bones', 'Roger Davies', 'Owen Cauldwell'], ['Laura Madley', 'Orla Quirke', 'Parvati Patil', 'Eloise Midgeon', 'Zacharias Smith', 'Cormac McLaggen', 'Lisa Turpin', 'Demelza Robins', 'Ernie Macmillan', 'Millicent Bullstrode', 'Percy Weasley', 'Jimmy Peakes', 'Justin Finch-Fletchley', 'Miles Bletchley', 'Malcolm Baddock'], ['Marcus Belby', 'Euan Abercrombie', 'Vincent Crabbe', 'Ritchie Coote', 'Katie Bell', 'Terry Boot', 'Lavender Brown', 'Gregory Goyle', 'Marcus Flint', 'Dean Thomas', 'Jack Sloper', 'Rose Zeller', 'Stewart Ackerley', 'Fred Weasley', 'George Weasley', 'Romilda Vane', 'Alicia Spinnet', 'Kevin Whitby'], ['Friendly Friar', 'Grey Lady', 'Nearly Headless Nick', 'Bloody Baron']]
+    """
 
-#     all_students = []
-#     winter_16 = []
-#     spring_16 = []
-#     summer_16 = []
-#     fall_15 = []
-#     ghosts = []
+    all_students = []
+    winter_16 = []
+    spring_16 = []
+    summer_16 = []
+    fall_15 = []
+    ghosts = []
 
-#     # Code goes here
+    file = open(filename)
 
-#     return all_students
+    for line in file:
+        line = line.rstrip()
+        line = line.split("|")
+
+        first_name = line[0]
+        last_name = line[1]
+        full_name = first_name + " " + last_name
+        house = line[2]
+        advisor = line[3]
+        cohort = line[4]
+        
+
+        if cohort == "Winter 2016":
+            winter_16.append(full_name)
+        elif cohort == "Spring 2016":
+            spring_16.append(full_name)
+        elif cohort == "Summer 2016":
+            summer_16.append(full_name)  
+        elif cohort == "Fall 2015":
+            fall_15.append(full_name)
+        elif cohort == "G":
+            ghosts.append(full_name)
+        else:
+            continue
+
+    all_students.append(fall_15)
+    all_students.append(winter_16)
+    all_students.append(spring_16)
+    all_students.append(summer_16)
+    all_students.append(ghosts)
+
+    # print(winter_16)
+    # print(spring_16)
+
+    return all_students
 
 
 # def hogwarts_by_house(filename):
