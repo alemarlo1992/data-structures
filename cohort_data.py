@@ -66,8 +66,6 @@ def sort_by_cohort(filename):
         first_name = line[0]
         last_name = line[1]
         full_name = first_name + " " + last_name
-        house = line[2]
-        advisor = line[3]
         cohort = line[4]
         
 
@@ -96,32 +94,74 @@ def sort_by_cohort(filename):
     return all_students
 
 
-# def hogwarts_by_house(filename):
-#     """TODO: Sort students into lists by house and return all lists in one list.
+def hogwarts_by_house(filename):
+    """TODO: Sort students into lists by house and return all lists in one list.
 
-#     Iterate over the data to create an alphabeticaly sorted list for each
-#     house, and sorts students into their appropriate houses by last name. Sorts
-#     ghosts into a list called "ghosts" and instructors into a list called
-#     "instructors". Add them, in that order, to your list of houses.
+    Iterate over the data to create an alphabeticaly sorted list for each
+    house, and sorts students into their appropriate houses by last name. Sorts
+    ghosts into a list called "ghosts" and instructors into a list called
+    "instructors". Add them, in that order, to your list of houses.
 
-#     For example:
-#     >>> hogwarts_by_house("cohort_data.txt")
-#     [['Abbott', 'Chang', 'Creevey', 'Creevey', 'Edgecombe', 'Nott', 'Spinnet'], ['Abercrombie', 'Bell', 'Brown', 'Coote', 'Finnigan', 'Granger', 'Johnson', 'Jordan', 'Kirke', 'Longbottom', 'Macdonald', 'McDonald', 'McLaggen', 'Patil', 'Peakes', 'Potter', 'Robins', 'Sloper', 'Thomas', 'Vane', 'Weasley', 'Weasley', 'Weasley', 'Weasley', 'Weasley', 'Wood'], ['Bones', 'Branstone', 'Cauldwell', 'Diggory', 'Finch-Fletchley', 'Macmillan', 'Madley', 'Midgeon', 'Smith', 'Whitby', 'Zeller'], ['Ackerley', 'Belby', 'Boot', 'Brocklehurst', 'Carmichael', 'Clearwater', 'Corner', 'Davies', 'Goldstein', 'Lovegood', 'Patil', 'Quirke', 'Turpin'], ['Baddock', 'Bletchley', 'Bullstrode', 'Crabbe', 'Flint', 'Goyle', 'Higgs', 'Malfoy', 'Parkinson', 'Pritchard', 'Pucey', 'Zabini'], ['Baron', 'Friar', 'Lady', 'Nick'], ['Flitwick', 'McGonagall', 'Snape', 'Sprout']]
+    For example:
+    >>> hogwarts_by_house("cohort_data.txt")
+    [['Abbott', 'Chang', 'Creevey', 'Creevey', 'Edgecombe', 'Nott', 'Spinnet'], ['Abercrombie', 'Bell', 'Brown', 'Coote', 'Finnigan', 'Granger', 'Johnson', 'Jordan', 'Kirke', 'Longbottom', 'Macdonald', 'McDonald', 'McLaggen', 'Patil', 'Peakes', 'Potter', 'Robins', 'Sloper', 'Thomas', 'Vane', 'Weasley', 'Weasley', 'Weasley', 'Weasley', 'Weasley', 'Wood'], ['Bones', 'Branstone', 'Cauldwell', 'Diggory', 'Finch-Fletchley', 'Macmillan', 'Madley', 'Midgeon', 'Smith', 'Whitby', 'Zeller'], ['Ackerley', 'Belby', 'Boot', 'Brocklehurst', 'Carmichael', 'Clearwater', 'Corner', 'Davies', 'Goldstein', 'Lovegood', 'Patil', 'Quirke', 'Turpin'], ['Baddock', 'Bletchley', 'Bullstrode', 'Crabbe', 'Flint', 'Goyle', 'Higgs', 'Malfoy', 'Parkinson', 'Pritchard', 'Pucey', 'Zabini'], ['Baron', 'Friar', 'Lady', 'Nick'], ['Flitwick', 'McGonagall', 'Snape', 'Sprout']]
 
-#     """
+    """
 
-#     all_hogwarts = []
-#     dumbledores_army = []
-#     gryffindor = []
-#     hufflepuff = []
-#     ravenclaw = []
-#     slytherin = []
-#     ghosts = []
-#     instructors = []
+    all_hogwarts = []
+    dumbledores_army = []
+    gryffindor = []
+    hufflepuff = []
+    ravenclaw = []
+    slytherin = []
+    ghosts = []
+    instructors = []
 
-#     # Code goes here
+    file = open(filename)
 
-#     return all_hogwarts
+    for line in file:
+        line = line.rstrip()
+        line = line.split("|")
+
+        last_name = line[1]
+        house = line[2]
+        advisor = line[3]
+        cohort = line[4]
+        
+        if house == "Hufflepuff":
+            hufflepuff.append(last_name)
+        elif house == "Gryffindor":
+            gryffindor.append(last_name)
+        elif house == "Ravenclaw":
+            ravenclaw.append(last_name)  
+        elif house == "Slytherin":
+            slytherin.append(last_name)
+        elif house == "Dumbledore's Army":
+            dumbledores_army.append(last_name)
+        elif house == "" and cohort == "G":
+            ghosts.append(last_name)
+        elif house == "" and cohort == "I":
+            instructors.append(last_name)
+
+    dumbledores_army.sort()
+    gryffindor.sort()
+    hufflepuff.sort()
+    ravenclaw.sort()
+    slytherin.sort()
+    ghosts.sort()
+    instructors.sort()
+    
+    #append each house list to all_hogwarts
+
+    all_hogwarts.append(dumbledores_army)
+    all_hogwarts.append(gryffindor)
+    all_hogwarts.append(hufflepuff)
+    all_hogwarts.append(ravenclaw)
+    all_hogwarts.append(slytherin)
+    all_hogwarts.append(ghosts)
+    all_hogwarts.append(instructors)
+
+    return all_hogwarts
 
 
 # def all_students_tuple_list(filename):
